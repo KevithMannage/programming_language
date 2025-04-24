@@ -1,4 +1,4 @@
-package lexical_Analyser;
+package Lexical_Analyser;
 
 import java.util.List;
 
@@ -17,7 +17,7 @@ public class TestLexicalAnalyzer {
 			
 			// Print the generated tokens
 	        for (Token token : tokens) {
-	            System.out.println("<" + token.type + ", " + token.value + ">");
+	            System.out.println("<" + token.type + ", " + token.value + "  >");
 	        }
 		} catch (Exception e) {
 			System.out.println(e.getMessage());

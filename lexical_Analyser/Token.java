@@ -1,4 +1,4 @@
-package lexical_Analyser;
+package Lexical_Analyser;
 
 public class Token {
     public TokenType type;
