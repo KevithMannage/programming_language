@@ -7,7 +7,7 @@ import Lexical_Analyser.Token;
 public class TestParser {
 
 	public static void main(String[] args) {
-		String inputFileName = "t1.txt";
+		String inputFileName = "input.txt";
 	      LexicalAnalyser scanner = new LexicalAnalyser(inputFileName);
 	      List<Token> tokens;
 	      List<Node> AST;   

@@ -9,7 +9,7 @@ public class TestLexicalAnalyzer {
 //          return;
 //      }
 
-      String inputFileName = "t1.txt";
+      String inputFileName = "input.txt";
       LexicalAnalyser scanner = new LexicalAnalyser(inputFileName);
       List<Token> tokens;
 		try {
