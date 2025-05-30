@@ -358,18 +358,40 @@ public class CSEMachine {
         }
     }
     
-    public String getTupleValue(Tup tup) {
-        String temp = "(";
-        for (Symbol symbol: tup.symbols) {
-            if (symbol instanceof Tup) {
-                temp = temp + this.getTupleValue((Tup) symbol) + ", ";
-            } else {
-                temp = temp + symbol.getNodeData() + ", ";
-            }            
+    // public String getTupleValue(Tup tup) {
+    //     String temp = "(";
+    //     for (Symbol symbol: tup.symbols) {
+    //         if (symbol instanceof Tup) {
+    //             temp = temp + this.getTupleValue((Tup) symbol) + ", ";
+    //         } else {
+    //             temp = temp + symbol.getNodeData() + ", ";
+    //         }            
+    //     }
+    //     temp = temp.substring(0, temp.length()-2) + ")";
+    //     return temp;
+    // }
+public String getTupleValue(Tup tup) {
+    StringBuilder temp = new StringBuilder("(");
+    boolean first = true;
+    for (Symbol symbol : tup.symbols) {
+        if (symbol instanceof Tup) {
+            String inner = this.getTupleValue((Tup) symbol);
+            // Remove outer parentheses from inner tuple
+            inner = inner.substring(1, inner.length() - 1);
+            if (!inner.isEmpty()) {
+                if (!first) temp.append(", ");
+                temp.append(inner);
+                first = false;
+            }
+        } else if (!symbol.getNodeData().isBlank()) {
+            if (!first) temp.append(", ");
+            temp.append(symbol.getNodeData());
+            first = false;
         }
-        temp = temp.substring(0, temp.length()-2) + ")";
-        return temp;
     }
+    temp.append(")");
+    return temp.toString();
+}
     
     public String getAnswer() {
         this.execute();
