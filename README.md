@@ -10,8 +10,8 @@
 
 This project implements a complete interpreter for the **RPAL (Right-reference Pascal)** programming language as part of the CS 3513 Programming Language course. The interpreter comprises four key components:
 
-1. **Lexical Analyzer**: Tokenizes the input source code based on the lexical rules defined in [RPAL_Lex.pdf](docs/RPAL_Lex.pdf).
-2. **Parser**: Constructs an Abstract Syntax Tree (AST) from the token stream using the grammar rules provided in [RPAL_Grammar.pdf](docs/RPAL_Grammar.pdf).
+1. **Lexical Analyzer**: Tokenizes the input source code based on the lexical rules defined in [RPAL_Lex.pdf](Docs/RPAL_Lex.pdf).
+2. **Parser**: Constructs an Abstract Syntax Tree (AST) from the token stream using the grammar rules provided in [RPAL_Grammar.pdf](Docs/RPAL_Grammar.pdf).
 3. **AST Standardizer**: Transforms the AST into a Standardized Tree (ST) by eliminating syntactic sugar and normalizing expressions for evaluation.
 4. **CSE Machine (Control Stack Environment Machine)**: Evaluates the ST using functional evaluation semantics to produce the final program output.
 
