@@ -1,0 +1,6 @@
+let findMax T = findMaxRec (T, Order T, 0)
+where rec findMaxRec (T, i, max) =
+    i eq 0 -> max 
+    | (T i) > max -> findMaxRec (T, (i-1), (T i)) 
+        | findMaxRec (T, (i-1), max)
+in Print (findMax (20, 41, 100, 19, 12))

@@ -1,0 +1,8 @@
+let 
+    OddEven n = (n - (n/2) * 2) eq 1 -> 'Odd' | 'Even' 
+    and 
+    rec OddEvenRec n = 
+            n eq 1 -> 'Odd' 
+            | n eq 0 -> 'Even' 
+            | OddEvenRec (n-2)
+    in Print (OddEven 1, OddEvenRec 2)

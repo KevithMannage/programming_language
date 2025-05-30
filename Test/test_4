@@ -1,0 +1,6 @@
+let rec sumuptoSeries a b =
+    a > b -> nil
+    | (sumuptoSeries (a+1) b, Print ' ', Print (Sumupto a))
+where rec Sumupto n = 
+    n eq 0 -> 0 | n + Sumupto (n-1)
+in sumuptoSeries 3 10

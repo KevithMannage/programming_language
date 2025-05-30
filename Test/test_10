@@ -1,0 +1,6 @@
+let isPerfectSqr n = isPerfectSqrRec n 1
+where rec isPerfectSqrRec n i = 
+    n eq (i ** 2) -> true
+    | n < (i ** 2) -> false
+    | isPerfectSqrRec n (i+1)
+in Print (isPerfectSqr 121)

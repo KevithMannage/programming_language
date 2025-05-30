@@ -1,0 +1,8 @@
+let isPrimeList T = isPrimeListRec (T, Order T)
+where rec isPrimeListRec (T, N) = 
+    N eq 0 -> nil
+    | (isPrimeListRec (T, (N-1)) aug (isPrime (T N)))
+where isPrime n = recIsPrime 2 n
+where rec recIsPrime div num = div >= num -> true | 
+    (num - (num / div) * div) ne 0 -> recIsPrime (div + 1) num | false
+in Print (isPrimeList (2, 2, 9, 20, 21, 25, 31))
