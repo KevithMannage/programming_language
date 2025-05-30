@@ -44,6 +44,7 @@ public class Evaluvator {
 //		        csemachine.printControl();
 //		        csemachine.printStack();
 //		        csemachine.printEnvironment();
+
 		       return csemachine.getAnswer();
 			} catch (Exception e) {
 				System.out.println(e.getMessage());
