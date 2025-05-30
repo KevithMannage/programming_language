@@ -731,6 +731,9 @@ public class Parser {
         stringAST = new ArrayList<>();
         hasError = false; // Initialize error flag
     }
+    public boolean hasError() {
+    return hasError;
+    }
 
     public List<Node> parse() {
         tokens.add(new Token(TokenType.EndOfTokens, ""));

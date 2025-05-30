@@ -40,6 +40,7 @@ public class rpal {
             System.out.println("Invalid Arguments Passing!");
             return;
         }
+        
         System.out.println(Evaluvator.evaluvate(fn,isPrintAST,isPrintST));                                   // get and print the answer
 
 
