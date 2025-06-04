@@ -5,4 +5,4 @@ let
             n eq 1 -> 'Odd' 
             | n eq 0 -> 'Even' 
             | OddEvenRec (n-2)
-    in Print (OddEven 1, OddEvenRec 2)
+    in Print (OddEven 1, OddEvenRec 1)

@@ -53,7 +53,12 @@ public class CSEMachineFactory {
                 } else if (node.getNodeData().startsWith("<INT:")) {                    
                     return new Int(node.getNodeData().substring(5, node.getNodeData().length()-1));
                 } else if (node.getNodeData().startsWith("<STR:")) {                    
-                    return new Str(node.getNodeData().substring(6, node.getNodeData().length()-2));
+                    String strVal = node.getNodeData().substring(6, node.getNodeData().length()-2);
+                    // Remove quotes if present
+                    if (strVal.startsWith("'") && strVal.endsWith("'")) {
+                        strVal = strVal.substring(1, strVal.length()-1);
+                    }
+                    return new Str(strVal);
                 } else if (node.getNodeData().startsWith("<nil")) {                    
                     return new Tup();
                 } else if (node.getNodeData().startsWith("<true>")) {                    
@@ -80,7 +85,7 @@ public class CSEMachineFactory {
         lambda.setDelta(this.getDelta(node.childNodes.get(1)));
         if (",".equals(node.childNodes.get(0).getNodeData())) {
             for (Node identifier: node.childNodes.get(0).childNodes) {
-                lambda.identifiers.add(new Id(identifier.getNodeData().substring(4, node.getNodeData().length()-1)));
+                lambda.identifiers.add(new Id(identifier.getNodeData().substring(4, identifier.getNodeData().length()-1)));
             }
         } else {
             lambda.identifiers.add(new Id(node.childNodes.get(0).getNodeData().substring(4, node.childNodes.get(0).getNodeData().length()-1)));
