@@ -1,6 +1,6 @@
  import Engine.Evaluvator;
 
-public class rpal {
+public class myrpal {
     
     public static void main(String[] args) {  
         String fn;
