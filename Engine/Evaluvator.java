@@ -9,7 +9,7 @@ import Standardizer.AST;
 import Standardizer.BuildAST;
 import Lexical_Analyser.LexicalAnalyser;
 import Lexical_Analyser.Token;
-
+// CSEMachineFactory.java
 public class Evaluvator {
     public static String evaluvate(String filename, boolean isPrintAST, boolean isPrintST) {
 
@@ -30,7 +30,7 @@ public class Evaluvator {
                 System.out.println("Parsing error detected. Evaluation aborted.");
                 return "";
             }
-
+           // Convert the AST to a string representation
             ArrayList<String> stringAST = parser.convertAST_toStringAST();
             if (isPrintAST) {
                 for (String string : stringAST) {
