@@ -55,6 +55,7 @@ public class Parser {
         String dots = "";
         List<Node> stack = new ArrayList<>();
 
+        // Initialize the stack with the root node
         while (!AST.isEmpty()) {
             if (stack.isEmpty()) {
                 if (AST.get(AST.size() - 1).noOfChildren == 0) {
@@ -63,6 +64,7 @@ public class Parser {
                     Node node = AST.remove(AST.size() - 1);
                     stack.add(node);
                 }
+                // Add a dot for the root node
             } else {
                 if (AST.get(AST.size() - 1).noOfChildren > 0) {
                     Node node = AST.remove(AST.size() - 1);
@@ -88,6 +90,7 @@ public class Parser {
         return stringAST;
     }
 
+    // Helper method to add strings to the stringAST based on node type
     void addStrings(String dots, Node node) {
         switch (node.type) {
             case identifier:
@@ -376,6 +379,7 @@ public class Parser {
         return true;
     }
 
+    // Rands
     boolean Rn() {
         if (hasError) return false;
 //        System.out.println("Rn()");
@@ -458,11 +462,13 @@ public class Parser {
 //        System.out.println("Da()");
         if (!Dr()) return false;
         int n = 1;
+        // Check for multiple definitions separated by 'and'
         while (tokens.get(0).value.equals("and")) {
             tokens.remove(0);
             if (!Dr()) return false;
             n++;
         }
+        // If there are multiple definitions, add an 'and' node
         if (n > 1) {
             AST.add(new Node(NodeType.and, "and", n));
         }
@@ -477,6 +483,7 @@ public class Parser {
             tokens.remove(0);
             isRec = true;
         }
+        // Check for 'let' or 'fn' keyword
         if (!Db()) return false;
         if (isRec) {
             AST.add(new Node(NodeType.rec, "rec", 1));
@@ -489,6 +496,7 @@ public class Parser {
 //        System.out.println("Db()");
         if (tokens.get(0).type.equals(TokenType.PUNCTUATION) && tokens.get(0).value.equals("(")) {
             tokens.remove(0);
+            // Handle empty parameters
             if (!D()) return false;
             if (!tokens.get(0).value.equals(")")) {
                 System.out.println("Parsing error at Db #1");
@@ -549,22 +557,27 @@ public class Parser {
         if (tokens.get(0).type.equals(TokenType.PUNCTUATION) && tokens.get(0).value.equals("(")) {
             tokens.remove(0);
             boolean isVl = false;
+            // Handle empty parameters
             if (tokens.get(0).type.equals(TokenType.IDENTIFIER)) {
                 if (!Vl()) return false;
                 isVl = true;
             }
+            // Check for closing parenthesis
             if (!tokens.get(0).value.equals(")")) {
                 System.out.println("Parse error at Vb: unmatched )");
                 hasError = true;
                 return false;
             }
+            // Remove the closing parenthesis
             tokens.remove(0);
             if (!isVl) {
                 AST.add(new Node(NodeType.empty_params, "()", 0));
             }
+            // Add empty parameters node to AST
         } else if (tokens.get(0).type.equals(TokenType.IDENTIFIER)) {
             AST.add(new Node(NodeType.identifier, tokens.get(0).value, 0));
             tokens.remove(0);
+            // Add identifier node to AST
         } else {
             System.out.println("Parse error at Vb: IDENTIFIER or '(' expected");
             hasError = true;
@@ -573,6 +586,7 @@ public class Parser {
         return true;
     }
 
+    // Variable List
     boolean Vl() {
         if (hasError) return false;
 //        System.out.println("Vl()");
@@ -586,6 +600,7 @@ public class Parser {
                 hasError = true;
                 return false;
             }
+            // Add identifier node to AST
             AST.add(new Node(NodeType.identifier, tokens.get(0).value, 0));
             tokens.remove(0);
             n++;

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public class Node {
 
+    // This class represents a node in the Abstract Syntax Tree (AST).
     private String nodeData; 
     private int nodeDepth; 
     private Node parentNode; 

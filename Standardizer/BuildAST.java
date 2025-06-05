@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public class BuildAST {
 
+    // This class is responsible for building an Abstract Syntax Tree (AST) from a list of strings.
     public BuildAST() {
     }
 
@@ -22,6 +23,7 @@ public class BuildAST {
                 index++;
             }
 
+            // If the item is empty after leading dots, skip it
             Node currentNode = NodeFactory.createNode(item.substring(index), depth);
 
             if (currentDepth < depth) {
@@ -35,6 +37,7 @@ public class BuildAST {
                 currentNode.setParentNode(previousNode.getParentNode());
             }
 
+            // Update the previous node and current depth for the next iteration
             previousNode = currentNode;
             currentDepth = depth;
         }

@@ -1,5 +1,6 @@
 package Parser;
 
+// This class represents a node in the Abstract Syntax Tree (AST) used for parsing.
 public enum NodeType {
 	let,
 	fcn_form,

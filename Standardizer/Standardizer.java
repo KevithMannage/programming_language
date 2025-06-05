@@ -3,8 +3,9 @@ package Standardizer;
 import java.util.ArrayList;
 
 public class Standardizer {
-
+    // This class is responsible for standardizing nodes in an abstract syntax tree (AST).
     public static void standardizeNode(Node currentNode) {
+        // This method standardizes the current node and its child nodes based on their type.
         if (!currentNode.isStandardized) {
             for (Node child : currentNode.childNodes) {
                 standardizeNode(child);
@@ -40,7 +41,7 @@ public class Standardizer {
         }
         currentNode.isStandardized = true;
     }
-
+    // This method traverses the AST recursively and standardizes nodes based on their type.
     private static void standardizeLet(Node currentNode) {
         Node temp1 = currentNode.childNodes.get(0).childNodes.get(1);
         temp1.setParentNode(currentNode);
@@ -54,6 +55,7 @@ public class Standardizer {
         currentNode.setNodeData("gamma");
     }
 
+    // This method standardizes the "let" node by rearranging its child nodes and updating their properties.
     private static void standardizeWhere(Node currentNode) {
         Node temp = currentNode.childNodes.get(0);
         currentNode.childNodes.set(0, currentNode.childNodes.get(1));
@@ -62,15 +64,18 @@ public class Standardizer {
         standardizeNode(currentNode);
     }
 
+    // This method standardizes the "where" node by swapping its child nodes and updating its type to "let".
     private static void standardizeFunctionForm(Node currentNode) {
         Node expression = currentNode.childNodes.get(currentNode.childNodes.size() - 1);                    
         Node currentLambda = NodeFactory.createNode("lambda", currentNode.getNodeDepth() + 1, currentNode, new ArrayList<Node>(), true);
         currentNode.childNodes.add(1, currentLambda);
+        // Move the first variable to the lambda node and update its properties
         while (!currentNode.childNodes.get(2).equals(expression)) {
             Node variable = currentNode.childNodes.get(2);
             currentNode.childNodes.remove(2);
             variable.setNodeDepth(currentLambda.getNodeDepth() + 1);
             variable.setParentNode(currentLambda);
+            // Add the variable to the current lambda node
             currentLambda.childNodes.add(variable);
             if (currentNode.childNodes.size() > 3) {
                 currentLambda = NodeFactory.createNode("lambda", currentLambda.getNodeDepth() + 1, currentLambda, new ArrayList<Node>(), true);
@@ -81,18 +86,21 @@ public class Standardizer {
         currentNode.childNodes.remove(2);
         currentNode.setNodeData("=");
     }
-
+    
+    // This method standardizes the "function_form" node by rearranging its child nodes and updating their properties.
     private static void standardizeLambda(Node currentNode) {
         if (currentNode.childNodes.size() > 2) {
             Node lastChild = currentNode.childNodes.get(currentNode.childNodes.size() - 1);
             Node currentLambda = NodeFactory.createNode("lambda", currentNode.getNodeDepth() + 1, currentNode, new ArrayList<Node>(), true);
             currentNode.childNodes.add(1, currentLambda);
+            // Move the first variable to the lambda node and update its properties
             while (!currentNode.childNodes.get(2).equals(lastChild)) {
                 Node variable = currentNode.childNodes.get(2);
                 currentNode.childNodes.remove(2);
                 variable.setNodeDepth(currentLambda.getNodeDepth() + 1);
                 variable.setParentNode(currentLambda);
                 currentLambda.childNodes.add(variable);
+                // If there are more than 3 child nodes, create a new lambda node
                 if (currentNode.childNodes.size() > 3) {
                     currentLambda = NodeFactory.createNode("lambda", currentLambda.getNodeDepth() + 1, currentLambda, new ArrayList<Node>(), true);
                     currentLambda.getParentNode().childNodes.add(currentLambda);
@@ -103,6 +111,7 @@ public class Standardizer {
         }
     }
 
+    // This method standardizes the "lambda" node by rearranging its child nodes and updating their properties.
     private static void standardizeWithin(Node currentNode) {
         Node firstX = currentNode.childNodes.get(0).childNodes.get(0);                    
         Node secondX = currentNode.childNodes.get(1).childNodes.get(0);
@@ -128,6 +137,7 @@ public class Standardizer {
         currentNode.setNodeData("=");
     }
 
+    // This method standardizes the "within" node by rearranging its child nodes and updating their properties.
     private static void standardizeAt(Node currentNode) {
         Node gamma1 = NodeFactory.createNode("gamma", currentNode.getNodeDepth() + 1, currentNode, new ArrayList<Node>(), true);
         Node firstChild = currentNode.childNodes.get(0);
@@ -144,9 +154,11 @@ public class Standardizer {
         currentNode.setNodeData("gamma");
     }
 
+    // This method standardizes the "at" node by rearranging its child nodes and updating their properties.
     private static void standardizeAnd(Node currentNode) {
         Node comma = NodeFactory.createNode(",", currentNode.getNodeDepth() + 1, currentNode, new ArrayList<Node>(), true);
         Node tau = NodeFactory.createNode("tau", currentNode.getNodeDepth() + 1, currentNode, new ArrayList<Node>(), true);
+        // Rearrange the child nodes of the "and" node into two new nodes: comma and tau
         for (Node equal : currentNode.childNodes) {
             equal.childNodes.get(0).setParentNode(comma);
             equal.childNodes.get(1).setParentNode(tau);
@@ -159,6 +171,7 @@ public class Standardizer {
         currentNode.setNodeData("=");
     }
 
+    // This method standardizes the "and" node by rearranging its child nodes and updating their properties.
     private static void standardizeRec(Node currentNode) {
         Node firstX = currentNode.childNodes.get(0).childNodes.get(0);
         Node firstE = currentNode.childNodes.get(0).childNodes.get(1);

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public class NodeFactory {
 
+    // This class is responsible for creating Node instances for the Abstract Syntax Tree (AST).
     public NodeFactory() {
     }
 
