@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import Standardizer.AST;
 import Standardizer.Node;
 
+// CSEMachineFactory.java
+// This class is responsible for creating instances of the CSEMachine and its components
 public class CSEMachineFactory {
     private E e0 = new E(0);
     private int i = 1;
@@ -92,7 +94,7 @@ public class CSEMachineFactory {
         }
         return lambda;
     }
-    
+    // This method traverses the AST in pre-order and collects symbols
     private ArrayList<Symbol> getPreOrderTraverse(Node node) {
         ArrayList<Symbol> symbols = new ArrayList<Symbol>();
         if ("lambda".equals(node.getNodeData())) {

@@ -267,7 +267,8 @@ public class CSEMachine {
         }
         System.out.println();
     }
-    
+    //print the environment
+    // e0 is the global environment
     public void printEnvironment() {
         for (Symbol symbol: this.environment) {
             System.out.print("e"+((E) symbol).getIndex()+ " --> ");
@@ -278,7 +279,7 @@ public class CSEMachine {
             }
         }
     }
-    
+    //apply unary and binary operations
     public Symbol applyUnaryOperation(Symbol rator, Symbol rand) {
         if ("neg".equals(rator.getNodeData())) {
             int val = Integer.parseInt(rand.getNodeData());
@@ -358,18 +359,7 @@ public class CSEMachine {
         }
     }
     
-    // public String getTupleValue(Tup tup) {
-    //     String temp = "(";
-    //     for (Symbol symbol: tup.symbols) {
-    //         if (symbol instanceof Tup) {
-    //             temp = temp + this.getTupleValue((Tup) symbol) + ", ";
-    //         } else {
-    //             temp = temp + symbol.getNodeData() + ", ";
-    //         }            
-    //     }
-    //     temp = temp.substring(0, temp.length()-2) + ")";
-    //     return temp;
-    // }
+
 public String getTupleValue(Tup tup) {
     StringBuilder temp = new StringBuilder("(");
     boolean first = true;
@@ -392,7 +382,7 @@ public String getTupleValue(Tup tup) {
     temp.append(")");
     return temp.toString();
 }
-    
+    // get the answer from the stack
     public String getAnswer() {
         this.execute();
         if (stack.get(0) instanceof Tup) {
