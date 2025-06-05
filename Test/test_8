@@ -1,6 +1,6 @@
 let rec fibSeries a b = 
     a > b -> nil |
-    (fibSeries (a+1) b, Print ' ', Print (fib a))
+    (Print (fib a), Print ' ', fibSeries (a+1) b,)
 where rec fib n = 
     n eq 0 -> 0 |
     n eq 1 -> 1 |
