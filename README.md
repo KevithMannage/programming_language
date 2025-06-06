@@ -18,6 +18,21 @@ This project implements a complete interpreter for the **RPAL (Right-reference P
 ## Prerequisites
 
 - **Java Development Kit (JDK)**: Ensure Java is installed (version compatible with the project, e.g., JDK 8 or higher).
+- **Make (GnuWin)**
+   - ## Installing Make on Windows
+      1. Download the [GnuWin Make setup](https://sourceforge.net/projects/gnuwin32/files/make/3.81/make-3.81.exe/download?use_mirror=webwerks&download) and install it.
+      2. **Add Make to your system PATH environment variable:**
+         - Open the Start Menu and search for "Environment Variables".
+         - Click "Edit the system environment variables".
+         - In the System Properties window, click "Environment Variables".
+         - Under "System variables", find and select the `Path` variable, then click "Edit".
+         - Click "New" and add the path to the GnuWin32 `bin` directory (e.g., `C:\Program Files (x86)\GnuWin32\bin`).
+         - Click OK to close all dialogs.
+      3. Open a new terminal and run:
+         ```sh
+         make --version
+         ```
+         to verify that `make` is installed.
 
 ## Clone the repository:
    ```bash
@@ -58,6 +73,39 @@ If the input file is located in a directory other than the root directory, repla
 
 ```bash
 java rpal ./Test/test_1.txt
+```
+
+## Makefile Usage
+
+The provided [makefile](makefile) allows you to easily compile, run, clean, and test the project.
+
+### Compile all Java files
+
+```sh
+make all
+```
+
+### Run the interpreter with the default input
+
+```sh
+make run
+```
+
+### Clean compiled `.class` files
+
+```sh
+make clean
+```
+
+### Run test cases
+
+Each test target runs the interpreter with a specific test file in the `Test` directory. For example:
+
+```sh
+make test1   # Runs java myrpal ./Test/test_1
+make test2   # Runs java myrpal ./Test/test_2
+...
+make test13  # Runs java myrpal ./Test/test_13
 ```
 
 ## Notes
